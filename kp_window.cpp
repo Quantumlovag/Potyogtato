@@ -7,13 +7,15 @@ Window::Window(int inX, int inY)
 {
     X=inX, Y=inY;
     gout.open(X, Y);
+    exit=false;
+    ready=false;
 }
 
 void Window::events()
 {
     event ev;
     int focus=-1;
-    while(gin>>ev)
+    while(gin>>ev && !exit && !ready)
     {
         if(ev.type==ev_key && ev.keycode==key_tab)
         {
@@ -58,4 +60,19 @@ void Window::events()
         }
         gout << refresh;
     }
+}
+
+void Window::close()
+{
+    exit=true;
+}
+
+void Window::step()
+{
+    ready=true;
+}
+
+void Window::examine()
+{
+    if(ready) ready=false;
 }

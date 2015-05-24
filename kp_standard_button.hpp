@@ -13,6 +13,7 @@ public:
     void print() const;
     void handle(event ev);
     bool focusable() {return true;}
+    void set_label(std::string t) {label=t;}
 };
 
 
